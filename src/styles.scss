@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "colors";
+
+@font-face {
+  font-family: Roboto;
+  src: url(./assets/fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(./assets/fonts/Roboto-Bold.ttf);
+  font-weight: 700;
+}
+
+body {
+  margin: 0;
+  height: 100lvh;
+  font-family: Roboto, serif;
+  color: $very-dark-blue;
+}
+
+.function-button {
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background-color: white;
+  border: 1px solid transparent;
+  color: $red-400;
+}
+
+.function-button:hover {
+  text-decoration: underline;
+}
