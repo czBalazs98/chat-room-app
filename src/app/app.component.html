@@ -1,9 +1,5 @@
 <app-header></app-header>
 
-@if (authService.user() != null) {
-  <app-menu-bar></app-menu-bar>
-}
-
 <div class="flex-grow p-3">
   <router-outlet></router-outlet>
 </div>
