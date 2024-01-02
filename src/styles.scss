@@ -19,7 +19,7 @@ body {
   margin: 0;
   height: 100lvh;
   font-family: Roboto, serif;
-  color: $very-dark-blue;
+  color: $gray-800;
 }
 
 .function-button {
@@ -27,9 +27,12 @@ body {
   padding: 0.25rem 0.5rem;
   background-color: white;
   border: 1px solid transparent;
-  color: $red-400;
 }
 
 .function-button:hover {
   text-decoration: underline;
+}
+
+.color-grayish-violet {
+  color: $grayish-violet;
 }

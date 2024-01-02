@@ -7,7 +7,7 @@ const redirectToLoggedInView = () => redirectLoggedInTo(['chat-room']);
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/chat-room',
+    redirectTo: '/chat-room-list',
     pathMatch: 'full'
   },
   {
@@ -18,9 +18,9 @@ export const routes: Routes = [
     data: {authGuardPipe: redirectToLoggedInView}
   },
   {
-    path: 'chat-room',
-    loadComponent: () => import('./chat-room/chat-room/chat-room.component')
-      .then(mod => mod.ChatRoomComponent),
+    path: 'chat-room-list',
+    loadComponent: () => import('./chat-room/chat-room-list/chat-room-list.component')
+      .then(mod => mod.ChatRoomListComponent),
     canActivate: [AuthGuard],
     data: {authGuardPipe: redirectToLoginView}
   }

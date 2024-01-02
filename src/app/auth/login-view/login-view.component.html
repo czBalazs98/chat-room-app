@@ -1,16 +1,31 @@
 <div class="h-full flex flex-col justify-center">
-  <div class="flex flex-col p-3 m-auto bg-red-400 rounded-md shadow-2xl lg:w-1/4"
-       [formGroup]="loginForm">
-    <h2 class="text-white text-xl font-bold mb-6">Login</h2>
+  <div class="flex flex-col p-8 m-auto bg-green-100 shadow-2xl lg:w-1/4"
+       [formGroup]="loginForm" (keyup.enter)="login()">
+    <h2 class="text-2xl mb-6 font-bold color-grayish-violet">Login</h2>
 
     <app-form-field>
-      <label for="email-input" class="text-white">E-mail address</label>
-      <input appFormField id="email-input" type="text" formControlName="email">
+      <label for="email-input">E-mail address</label>
+      <input [ngClass]="loginForm.get('email')!.invalid && loginForm.get('email')!.dirty ? 'border border-red-500' : ''"
+             appFormField id="email-input" type="text" formControlName="email">
+
+      @if (loginForm.get('email')!.hasError('required') && loginForm.get('email')!.dirty) {
+        <p appErrorLabel>This field is required</p>
+      }
+
+      @if (loginForm.get('email')!.hasError('email') && loginForm.get('email')!.dirty) {
+        <p appErrorLabel>Please enter a valid e-mail address</p>
+      }
     </app-form-field>
 
     <app-form-field>
-      <label for="password-input" class="text-white">Password</label>
-      <input appFormField id="password-input" type="password" formControlName="password">
+      <label for="password-input">Password</label>
+      <input appFormField id="password-input" type="password" formControlName="password"
+             [ngClass]="loginForm.get('password')!.invalid && loginForm.get('password')!.dirty ?
+                'border border-red-500' : ''">
+
+      @if (loginForm.get('password')!.hasError('required') && loginForm.get('password')!.dirty) {
+        <p appErrorLabel>This field is required</p>
+      }
     </app-form-field>
 
     <div class="flex justify-center">

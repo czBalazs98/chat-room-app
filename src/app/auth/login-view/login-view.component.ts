@@ -4,6 +4,8 @@ import {FormFieldComponent} from "../../common/form-field/form-field.component";
 import {FooterComponent} from "../../common/footer/footer.component";
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../service/auth.service";
+import {ErrorLabelDirective} from "../../common/form-field/error-label.directive";
+import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'app-login-view',
@@ -12,7 +14,9 @@ import {AuthService} from "../service/auth.service";
     FormFieldDirective,
     FormFieldComponent,
     FooterComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ErrorLabelDirective,
+    NgClass
   ],
   templateUrl: './login-view.component.html',
   styleUrl: './login-view.component.scss'
@@ -24,14 +28,18 @@ export class LoginViewComponent {
 
   loginForm = this.fb.group(
     {
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     }
   );
 
   login() {
     if (this.loginForm.valid) {
-      this.authService.logIn(this.loginForm.get('email')!.value!, this.loginForm.get('password')!.value!)
+      this.authService.logIn(this.loginForm.get('email')!.value!, this.loginForm.get('password')!.value!);
+    } else {
+      console.log('here');
+      this.loginForm.get('email')!.markAsDirty();
+      this.loginForm.get('password')!.markAsDirty();
     }
   }
 
