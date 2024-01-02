@@ -1,0 +1,83 @@
+<div class="h-full flex flex-col justify-center">
+  <div class="flex flex-col p-8 m-auto bg-green-100 shadow-2xl lg:w-1/4"
+       [formGroup]="registrationForm" (keyup.enter)="register()">
+    <h2 class="text-2xl mb-6 font-bold color-grayish-violet">Registration</h2>
+
+    <app-form-field>
+      <label for="email-input">E-mail address</label>
+      <input
+        [ngClass]="registrationForm.get('email')!.invalid &&
+                   registrationForm.get('email')!.dirty ?
+                      'border border-red-500' : ''"
+        appFormField id="email-input" type="text" formControlName="email">
+
+      @if (registrationForm.get('email')!.hasError('required') &&
+            registrationForm.get('email')!.dirty) {
+        <p appErrorLabel>This field is required</p>
+      }
+
+      @if (registrationForm.get('email')!.hasError('email') &&
+            registrationForm.get('email')!.dirty) {
+        <p appErrorLabel>Please enter a valid e-mail address</p>
+      }
+    </app-form-field>
+
+    <app-form-field>
+      <label for="username-input">Username</label>
+      <input appFormField id="username-input" type="text" formControlName="displayName"
+             [ngClass]="registrationForm.get('displayName')!.invalid &&
+                        registrationForm.get('displayName')!.dirty ?
+                          'border border-red-500' : ''">
+
+      @if (registrationForm.get('displayName')!.hasError('required') &&
+            registrationForm.get('displayName')!.dirty) {
+        <p appErrorLabel>This field is required</p>
+      }
+    </app-form-field>
+
+    <app-form-field>
+      <label for="password-input">Password</label>
+      <input appFormField id="password-input" type="password" formControlName="password"
+             [ngClass]="registrationForm.get('password')!.invalid &&
+                        registrationForm.get('password')!.dirty ?
+                'border border-red-500' : ''">
+
+      @if (registrationForm.get('password')!.hasError('required') &&
+            registrationForm.get('password')!.dirty) {
+        <p appErrorLabel>This field is required</p>
+      }
+    </app-form-field>
+
+    <app-form-field>
+      <label for="confirm-password-input">Confirm password</label>
+      <input appFormField id="confirm-password-input" type="password" formControlName="passwordAgain"
+             [ngClass]="registrationForm.get('passwordAgain')!.invalid &&
+                        registrationForm.get('passwordAgain')!.dirty ?
+                          'border border-red-500' : ''">
+
+      @if (registrationForm.get('passwordAgain')!.hasError('required') &&
+            registrationForm.get('passwordAgain')!.dirty) {
+        <p appErrorLabel>This field is required</p>
+      }
+
+      @if (registrationForm.hasError('matchFields') &&
+            registrationForm.get('passwordAgain')!.dirty &&
+            registrationForm.get('password')!.dirty &&
+            !registrationForm.get('passwordAgain')!.invalid &&
+            !registrationForm.get('password')!.invalid) {
+        <p appErrorLabel>Passwords do not match</p>
+      }
+    </app-form-field>
+
+    <div class="flex justify-center mb-10">
+      <button class="function-button" (click)="register()">
+        Register
+      </button>
+    </div>
+
+    <p class="text-center font-bold color-grayish-violet">Already have an account? Sign in
+      <a routerLink="/login" class="text-blue-500 hover:underline">here</a>
+    </p>
+
+  </div>
+</div>

@@ -6,6 +6,7 @@ import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../service/auth.service";
 import {ErrorLabelDirective} from "../../common/form-field/error-label.directive";
 import {NgClass} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-login-view',
@@ -16,7 +17,8 @@ import {NgClass} from "@angular/common";
     FooterComponent,
     ReactiveFormsModule,
     ErrorLabelDirective,
-    NgClass
+    NgClass,
+    RouterLink
   ],
   templateUrl: './login-view.component.html',
   styleUrl: './login-view.component.scss'
@@ -37,7 +39,6 @@ export class LoginViewComponent {
     if (this.loginForm.valid) {
       this.authService.logIn(this.loginForm.get('email')!.value!, this.loginForm.get('password')!.value!);
     } else {
-      console.log('here');
       this.loginForm.get('email')!.markAsDirty();
       this.loginForm.get('password')!.markAsDirty();
     }

@@ -1,8 +1,16 @@
 import {Injectable, signal} from '@angular/core';
-import {Auth, onAuthStateChanged, signInWithEmailAndPassword, signOut, User} from "@angular/fire/auth";
+import {
+  Auth,
+  createUserWithEmailAndPassword, getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut, updateProfile,
+  User
+} from "@angular/fire/auth";
 import {Router} from "@angular/router";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {ErrorHandler} from "../error-handler";
+import {CreateUserRequest} from "../create-user-request";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +26,14 @@ export class AuthService {
         this._user.set(user);
       }
     });
+  }
+
+  register(createUserRequest: CreateUserRequest) {
+    createUserWithEmailAndPassword(this.auth, createUserRequest.email, createUserRequest.password)
+      .then(user => {
+        updateProfile(user.user, {displayName: createUserRequest.username})
+          .then(_ => this.router.navigate(['chat-room-list']));
+      });
   }
 
   logIn(email: string, password: string) {
