@@ -1,0 +1,11 @@
+<div class="flex shadow-md rounded-md bg-white p-3 cursor-pointer border-r-4 border-r-white hover:shadow-xl
+            hover:border-r-black">
+  <img class="mr-3" ngSrc="assets/images/default-chat-room-icon.svg" alt="chat room icon" height="40" width="40">
+  <div class="w-full p-2 overflow-hidden">
+    <p class="font-bold text-lg">{{ chatRoom.name }}</p>
+    <p class="text-xs color-grayish-violet overflow-hidden text-ellipsis whitespace-nowrap"
+      nz-tooltip nzTooltipPlacement="topLeft" nzTooltipTitle="Tags: {{ getChatRoomTags() }}">
+      Tags: {{ getChatRoomTags() }}
+    </p>
+  </div>
+</div>
