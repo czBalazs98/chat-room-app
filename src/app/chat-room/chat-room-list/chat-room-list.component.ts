@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 import {ChatRoom} from "../model/chat-room";
 import {ChatRoomCardComponent} from "../chat-room-card/chat-room-card.component";
+import {ChatRoomService} from "../service/chat-room.service";
+import {find} from "rxjs";
 
 @Component({
   selector: 'app-chat-room-list',
@@ -15,16 +17,16 @@ import {ChatRoomCardComponent} from "../chat-room-card/chat-room-card.component"
 })
 export class ChatRoomListComponent {
 
-  chatRooms: ChatRoom[] = [
-    {
-      name: 'World of Warcraft',
-      description: 'World of Warcraft related chat',
-      tags: ['wow', 'gaming', 'blizzard', 'pc']
-    },
-    {
-      name: 'Angular',
-      description: 'Angular related chat room',
-      tags: ['angular', 'frontend', 'css', 'html', 'programming', 'tech', 'assssssdfffffdsaaasdffffffffdsaaaaaaaasdffdsafdsa']
-    }
-  ];
+  chatRooms = this.chatRoomService.chatRooms;
+
+  constructor(private chatRoomService: ChatRoomService) {
+  }
+
+  ngOnInit() {
+    this.findChatRooms();
+  }
+
+  findChatRooms() {
+    this.chatRoomService.findChatRooms();
+  }
 }

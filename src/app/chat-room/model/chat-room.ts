@@ -5,3 +5,7 @@ export interface ChatRoom {
   tags: string[];
   imageSrc?: string;
 }
+
+export interface ChatRoomResponse {
+  [key: string]: ChatRoom;
+}
