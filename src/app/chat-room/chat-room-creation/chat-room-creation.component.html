@@ -1,6 +1,6 @@
 <button class="function-button blue-button w-full" (click)="openChatRoomCreationDialog()">Create room</button>
 <p-dialog header="Create room" [(visible)]="visible" [modal]="true" [style]="{width: '30%'}">
-  <div class="flex flex-col px-3 pt-3 pb-12" [formGroup]="chatRoomForm">
+  <form class="flex flex-col px-3 pt-3 pb-12" [formGroup]="chatRoomForm" (ngSubmit)="saveChatRoom()">
     <app-form-field>
       <label for="name-input">Name</label>
       <input
@@ -28,8 +28,8 @@
     </app-form-field>
 
     <div class="flex justify-center mt-3">
-      <button class="function-button blue-button mr-3" (click)="saveChatRoom()">Save</button>
+      <button class="function-button blue-button mr-3" type="submit">Save</button>
       <button class="function-button bg-white shadow-md" (click)="closeChatRoomCreationDialog()">Cancel</button>
     </div>
-  </div>
+  </form>
 </p-dialog>

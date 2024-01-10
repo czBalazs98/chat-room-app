@@ -1,5 +1,5 @@
 import {Injectable, signal} from '@angular/core';
-import {child, Database, get, ref} from "@angular/fire/database";
+import {child, Database, get, ref, set} from "@angular/fire/database";
 import {ChatRoom, ChatRoomResponse} from "../model/chat-room";
 
 @Injectable({
@@ -25,5 +25,13 @@ export class ChatRoomService {
           this._chatRooms.set([]);
         }
       }).catch((error) => console.log(error));
+  }
+
+  saveChatRoom(chatRoom: ChatRoom) {
+    set(ref(this.database, 'chat-rooms/' + this.generateChatRoomId(chatRoom)), chatRoom);
+  }
+
+  generateChatRoomId(chatRoom: ChatRoom): string {
+    return chatRoom.name.replace(/\s/g, '');
   }
 }

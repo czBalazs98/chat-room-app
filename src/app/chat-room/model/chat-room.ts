@@ -1,8 +1,8 @@
 export interface ChatRoom {
   name: string;
   description?: string;
-  rules?: string[];
-  tags?: string[];
+  rules: string[] | null;
+  tags: string[] | null;
   imageSrc?: string;
 }
 

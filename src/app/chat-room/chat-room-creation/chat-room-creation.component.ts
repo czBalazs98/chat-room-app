@@ -6,6 +6,8 @@ import {FormFieldDirective} from "../../common/form-field/form-field.directive";
 import {ChipsModule} from "primeng/chips";
 import {NgClass} from "@angular/common";
 import {ErrorLabelDirective} from "../../common/form-field/error-label.directive";
+import {ChatRoomService} from "../service/chat-room.service";
+import {ChatRoom} from "../model/chat-room";
 
 @Component({
   selector: 'app-chat-room-creation',
@@ -21,11 +23,11 @@ export class ChatRoomCreationComponent {
   chatRoomForm = this.fb.group({
     name: ['', Validators.required],
     description: [''],
-    rules: [[]],
-    tags: [[]]
+    rules: [null],
+    tags: [null]
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private chatRoomService: ChatRoomService) {
   }
 
   openChatRoomCreationDialog() {
@@ -41,7 +43,8 @@ export class ChatRoomCreationComponent {
     this.chatRoomForm.get('name')!.markAsDirty();
 
     if (this.chatRoomForm.valid) {
-      console.log(this.chatRoomForm.value);
+      this.chatRoomService.saveChatRoom(<ChatRoom>this.chatRoomForm.value);
+      this.visible = false;
     }
   }
 
