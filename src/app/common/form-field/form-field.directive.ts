@@ -8,7 +8,7 @@ import {NgModel} from "@angular/forms";
 export class FormFieldDirective {
 
   constructor(private element: ElementRef) {
-    this.element.nativeElement.classList.add('rounded-md', 'outline-none', 'p-2', 'w-full');
+    this.element.nativeElement.classList.add('rounded-md', 'outline-none', 'p-2', 'w-full', 'bg-white', 'shadow-md');
   }
 
 }

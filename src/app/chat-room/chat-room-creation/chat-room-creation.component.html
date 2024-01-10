@@ -1,14 +1,35 @@
 <button class="function-button blue-button w-full" (click)="openChatRoomCreationDialog()">Create room</button>
-<p-dialog header="Create room" [(visible)]="visible" [modal]="true" [style]="{width: '40%'}">
-  <div class="flex flex-col" [formGroup]="chatRoomForm">
+<p-dialog header="Create room" [(visible)]="visible" [modal]="true" [style]="{width: '30%'}">
+  <div class="flex flex-col px-3 pt-3 pb-12" [formGroup]="chatRoomForm">
     <app-form-field>
       <label for="name-input">Name</label>
-      <input class="shadow-md" appFormField id="name-input" type="text" formControlName="name">
+      <input
+        [ngClass]="chatRoomForm.get('name')!.invalid && chatRoomForm.get('name')!.dirty ? 'border border-red-500' : ''"
+        appFormField id="name-input" type="text" formControlName="name">
+
+      @if (chatRoomForm.get('name')!.hasError('required') && chatRoomForm.get('name')!.dirty) {
+        <p appErrorLabel>You have to give the chat room a name</p>
+      }
+    </app-form-field>
+
+    <app-form-field>
+      <label for="rules-input">Rules</label>
+      <p-chips appFormField id="rules-input" formControlName="rules"></p-chips>
+    </app-form-field>
+
+    <app-form-field>
+      <label for="tags-input">Tags</label>
+      <p-chips appFormField id="tags-input" formControlName="tags"></p-chips>
     </app-form-field>
 
     <app-form-field>
       <label for="description-input">Description</label>
-      <textarea class="shadow-md" appFormField id="description-input" formControlName="description"></textarea>
+      <textarea class="resize-none" appFormField id="description-input" formControlName="description"></textarea>
     </app-form-field>
+
+    <div class="flex justify-center mt-3">
+      <button class="function-button blue-button mr-3" (click)="saveChatRoom()">Save</button>
+      <button class="function-button bg-white shadow-md" (click)="closeChatRoomCreationDialog()">Cancel</button>
+    </div>
   </div>
 </p-dialog>
