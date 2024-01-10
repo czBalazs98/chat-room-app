@@ -24,8 +24,6 @@ export const appConfig: ApplicationConfig = {
       provideDatabase(() => getDatabase())
     ),
     provideNzI18n(en_US),
-    importProvidersFrom(FormsModule),
-    importProvidersFrom(HttpClientModule),
     provideAnimations()
   ]
 };

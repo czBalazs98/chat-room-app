@@ -18,6 +18,6 @@ export class ChatRoomCardComponent {
   chatRoom!: ChatRoom;
 
   getChatRoomTags(): string {
-    return this.chatRoom.tags.join(", ");
+    return this.chatRoom.tags ? this.chatRoom.tags.join(", ") : '';
   }
 }

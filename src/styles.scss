@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import "colors";
+@import "assets/themes/chat-room-theme/theme";
 
 @font-face {
   font-family: Roboto;
@@ -25,7 +26,6 @@ body {
 .function-button {
   border-radius: 0.5rem;
   padding: 0.25rem 0.5rem;
-  background-color: white;
   border: 1px solid transparent;
 }
 
@@ -33,6 +33,19 @@ body {
   text-decoration: underline;
 }
 
+.blue-button {
+  color: white;
+  background-color: $blue-400;
+}
+
+.blue-button:hover {
+  background-color: $blue-300;
+}
+
 .color-grayish-violet {
   color: $grayish-violet;
+}
+
+.p-dialog {
+  background-color: $gray-50;
 }

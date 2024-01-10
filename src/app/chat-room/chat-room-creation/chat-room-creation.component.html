@@ -1,0 +1,14 @@
+<button class="function-button blue-button w-full" (click)="openChatRoomCreationDialog()">Create room</button>
+<p-dialog header="Create room" [(visible)]="visible" [modal]="true" [style]="{width: '40%'}">
+  <div class="flex flex-col" [formGroup]="chatRoomForm">
+    <app-form-field>
+      <label for="name-input">Name</label>
+      <input class="shadow-md" appFormField id="name-input" type="text" formControlName="name">
+    </app-form-field>
+
+    <app-form-field>
+      <label for="description-input">Description</label>
+      <textarea class="shadow-md" appFormField id="description-input" formControlName="description"></textarea>
+    </app-form-field>
+  </div>
+</p-dialog>
