@@ -7,7 +7,7 @@
         <img ngSrc="assets/images/search-icon.svg" alt="search icon" height="16" width="16">
       </button>
     </div>
-    <div class="flex-grow space-x-2">
+    <div class="flex-grow space-x-2 overflow-auto p-1">
       @for (chatRoom of chatRooms(); track chatRoom.name) {
         <app-chat-room-card [chatRoom]="chatRoom"></app-chat-room-card>
       }

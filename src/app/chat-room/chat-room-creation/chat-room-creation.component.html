@@ -1,4 +1,4 @@
-<button class="function-button blue-button w-full" (click)="openChatRoomCreationDialog()">Create room</button>
+<button class="function-button blue-button w-full mt-5" (click)="openChatRoomCreationDialog()">Create room</button>
 <p-dialog header="Create room" [(visible)]="visible" [modal]="true" [style]="{width: '30%'}">
   <form class="flex flex-col px-3 pt-3 pb-12" [formGroup]="chatRoomForm" (ngSubmit)="saveChatRoom()">
     <app-form-field>
