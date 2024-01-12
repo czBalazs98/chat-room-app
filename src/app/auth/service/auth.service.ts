@@ -32,7 +32,7 @@ export class AuthService {
     createUserWithEmailAndPassword(this.auth, createUserRequest.email, createUserRequest.password)
       .then(user => {
         updateProfile(user.user, {displayName: createUserRequest.username})
-          .then(_ => this.router.navigate(['chat-room-list']));
+          .then(_ => this.router.navigate(['chat']));
       });
   }
 
@@ -40,7 +40,7 @@ export class AuthService {
     signInWithEmailAndPassword(this.auth, email, password)
       .then(response => {
         this._user.set(response.user);
-        this.router.navigate(['chat-room-list']);
+        this.router.navigate(['chat']);
       })
       .catch(error => this.notification.error('Error', ErrorHandler.getErrorMessage(error.code),
         {nzPlacement: 'top', nzDuration: 0}));
