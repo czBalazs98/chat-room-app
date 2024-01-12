@@ -1,0 +1,13 @@
+@import '../../../../colors';
+
+.chat-room-card {
+  border-right: 4px solid white;
+}
+
+.chat-room-card:hover {
+  border-right-color: $blue-400;
+}
+
+.chat-room-card:hover .chat-room-title {
+  color: $blue-400;
+}
