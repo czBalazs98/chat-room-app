@@ -2,12 +2,12 @@ import {Routes} from '@angular/router';
 import {AuthGuard, redirectLoggedInTo, redirectUnauthorizedTo} from "@angular/fire/auth-guard";
 
 const redirectToLoginView = () => redirectUnauthorizedTo(['login']);
-const redirectToLoggedInView = () => redirectLoggedInTo(['chat-room-list']);
+const redirectToLoggedInView = () => redirectLoggedInTo(['chat']);
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/chat-room-list',
+    redirectTo: '/chat',
     pathMatch: 'full'
   },
   {
@@ -25,9 +25,9 @@ export const routes: Routes = [
     data: {authGuardPipe: redirectToLoggedInView}
   },
   {
-    path: 'chat-room-list',
-    loadComponent: () => import('./chat-room/chat-room-list/chat-room-list.component')
-      .then(mod => mod.ChatRoomListComponent),
+    path: 'chat',
+    loadComponent: () => import('./chat/chat-view/chat-view.component')
+      .then(mod => mod.ChatViewComponent),
     canActivate: [AuthGuard],
     data: {authGuardPipe: redirectToLoginView}
   }

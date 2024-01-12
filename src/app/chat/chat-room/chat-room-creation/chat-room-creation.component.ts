@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
 import {DialogModule} from "primeng/dialog";
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
-import {FormFieldComponent} from "../../common/form-field/form-field.component";
-import {FormFieldDirective} from "../../common/form-field/form-field.directive";
 import {ChipsModule} from "primeng/chips";
 import {NgClass} from "@angular/common";
-import {ErrorLabelDirective} from "../../common/form-field/error-label.directive";
 import {ChatRoomService} from "../service/chat-room.service";
 import {ChatRoom} from "../model/chat-room";
+import {ErrorLabelDirective} from "../../../common/form-field/error-label.directive";
+import {FormFieldDirective} from "../../../common/form-field/form-field.directive";
+import {FormFieldComponent} from "../../../common/form-field/form-field.component";
 
 @Component({
   selector: 'app-chat-room-creation',
