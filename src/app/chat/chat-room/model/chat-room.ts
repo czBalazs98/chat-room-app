@@ -1,11 +1,8 @@
 export interface ChatRoom {
+  id: number;
   name: string;
   description?: string;
-  rules: string[] | null;
+  rules: string | null;
   tags: string[] | null;
   imageSrc?: string;
-}
-
-export interface ChatRoomResponse {
-  [key: string]: ChatRoom;
 }

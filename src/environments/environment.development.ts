@@ -6,7 +6,6 @@ export const environment = {
     storageBucket: "chat-room-app-3747c.appspot.com",
     messagingSenderId: "234369152403",
     appId: "1:234369152403:web:21477b145a93a0ca65a466",
-    measurementId: "G-B5S4JSJNPB",
-    databaseURL: "https://chat-room-app-3747c-default-rtdb.europe-west1.firebasedatabase.app/"
+    measurementId: "G-B5S4JSJNPB"
   }
 };

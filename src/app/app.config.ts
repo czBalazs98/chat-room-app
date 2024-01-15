@@ -8,8 +8,7 @@ import {getAuth, provideAuth} from "@angular/fire/auth";
 import {en_US, provideNzI18n} from 'ng-zorro-antd/i18n';
 import {registerLocaleData} from '@angular/common';
 import en from '@angular/common/locales/en';
-import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {provideHttpClient, withFetch} from '@angular/common/http';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {getDatabase, provideDatabase} from "@angular/fire/database";
 
@@ -24,6 +23,7 @@ export const appConfig: ApplicationConfig = {
       provideDatabase(() => getDatabase())
     ),
     provideNzI18n(en_US),
-    provideAnimations()
+    provideAnimations(),
+    provideHttpClient(withFetch())
   ]
 };

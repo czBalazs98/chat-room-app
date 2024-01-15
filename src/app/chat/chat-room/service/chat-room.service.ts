@@ -1,6 +1,8 @@
 import {Injectable, signal} from '@angular/core';
-import {child, Database, get, ref, set} from "@angular/fire/database";
-import {ChatRoom, ChatRoomResponse} from "../model/chat-room";
+import {Database, ref} from "@angular/fire/database";
+import {ChatRoom} from "../model/chat-room";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,26 +14,20 @@ export class ChatRoomService {
   private _chatRooms = signal<ChatRoom[]>([]);
   chatRooms = this._chatRooms.asReadonly();
 
-  constructor(private database: Database) { }
-
-  findChatRooms() {
-    let response: ChatRoomResponse;
-    get(child(this.dbRef, 'chat-rooms'))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          response = snapshot.val() as ChatRoomResponse;
-          this._chatRooms.set(Object.values(response));
-        } else {
-          this._chatRooms.set([]);
-        }
-      }).catch((error) => console.log(error));
+  constructor(private database: Database, private httpClient: HttpClient) {
   }
 
-  saveChatRoom(chatRoom: ChatRoom) {
-    set(ref(this.database, 'chat-rooms/' + this.generateChatRoomId(chatRoom)), chatRoom);
+  findChatRooms(name: string | null) {
+    if (name === null || name.length === 0) {
+      this.httpClient.get<ChatRoom[]>('api/chat-rooms')
+        .subscribe(response => this._chatRooms.set(response));
+    } else {
+      this.httpClient.get<ChatRoom[]>(`api/chat-rooms/${name}`)
+        .subscribe(response => this._chatRooms.set(response));
+    }
   }
 
-  generateChatRoomId(chatRoom: ChatRoom): string {
-    return chatRoom.name.replace(/\s/g, '');
+  saveChatRoom(chatRoom: ChatRoom): Observable<ChatRoom> {
+    return this.httpClient.post<ChatRoom>('api/chat-rooms', chatRoom);
   }
 }

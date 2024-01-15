@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {DialogModule} from "primeng/dialog";
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ChipsModule} from "primeng/chips";
@@ -20,10 +20,13 @@ export class ChatRoomCreationComponent {
 
   visible: boolean = false;
 
+  @Output()
+  chatRoomCreated = new EventEmitter<void>();
+
   chatRoomForm = this.fb.group({
     name: ['', Validators.required],
     description: [''],
-    rules: [null],
+    rules: [''],
     tags: [null]
   });
 
@@ -43,7 +46,8 @@ export class ChatRoomCreationComponent {
     this.chatRoomForm.get('name')!.markAsDirty();
 
     if (this.chatRoomForm.valid) {
-      this.chatRoomService.saveChatRoom(<ChatRoom>this.chatRoomForm.value);
+      this.chatRoomService.saveChatRoom(<ChatRoom>this.chatRoomForm.value)
+        .subscribe(response => this.chatRoomCreated.emit());
       this.visible = false;
     }
   }

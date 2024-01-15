@@ -1,10 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
-import {ChatRoom} from "../model/chat-room";
 import {ChatRoomCardComponent} from "../chat-room-card/chat-room-card.component";
 import {ChatRoomService} from "../service/chat-room.service";
-import {find} from "rxjs";
 import {ChatRoomCreationComponent} from "../chat-room-creation/chat-room-creation.component";
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-chat-room-list',
@@ -12,12 +11,18 @@ import {ChatRoomCreationComponent} from "../chat-room-creation/chat-room-creatio
   imports: [
     NgOptimizedImage,
     ChatRoomCardComponent,
-    ChatRoomCreationComponent
+    ChatRoomCreationComponent,
+    ReactiveFormsModule
   ],
   templateUrl: './chat-room-list.component.html',
   styleUrl: './chat-room-list.component.scss'
 })
 export class ChatRoomListComponent {
+
+  @ViewChild('chatRoomContainer')
+  chatRoomContainer!: ElementRef;
+
+  searchInput = new FormControl('');
 
   chatRooms = this.chatRoomService.chatRooms;
 
@@ -29,6 +34,12 @@ export class ChatRoomListComponent {
   }
 
   findChatRooms() {
-    this.chatRoomService.findChatRooms();
+    this.chatRoomService.findChatRooms(this.searchInput.value);
+  }
+
+  resetSearchInput() {
+    this.searchInput.reset();
+    this.findChatRooms();
+    this.chatRoomContainer.nativeElement.scrollTop = 0;
   }
 }
