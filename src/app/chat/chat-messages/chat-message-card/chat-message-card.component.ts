@@ -25,7 +25,7 @@ export class ChatMessageCardComponent {
   isOwnMessage(): boolean {
     const displayName = this.user()!.displayName;
     const username = displayName ? displayName : this.user()!.uid;
-    return username == this.chatMessage.sender;
+    return username === this.chatMessage.sender;
   }
 
   getAvatar(): string {

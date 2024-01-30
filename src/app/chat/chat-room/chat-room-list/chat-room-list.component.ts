@@ -46,13 +46,14 @@ export class ChatRoomListComponent {
   }
 
   search() {
-    this.searchDebounceSubject.next(this.searchInput.value)
+    this.searchDebounceSubject.next(this.searchInput.value);
   }
 
   resetSearchInput() {
     this.searchInput.reset();
     this.chatRoomService.findChatRooms('');
     this.chatRoomContainer.nativeElement.scrollTop = 0;
+    console.log(this.selectedChatRoom);
   }
 
   selectChatRoom(chatRoom: ChatRoom) {

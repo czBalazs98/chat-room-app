@@ -44,6 +44,11 @@ export class ChatViewComponent {
     this.scrollToBottom();
   }
 
+  selectChatRoom(chatRoom: ChatRoom | null) {
+    this.selectedChatRoom = chatRoom;
+    console.log(this.selectedChatRoom);
+  }
+
   scrollToBottom() {
     const messageContainerElement = this.messageContainer.nativeElement;
     messageContainerElement.scrollTop = messageContainerElement.scrollHeight;

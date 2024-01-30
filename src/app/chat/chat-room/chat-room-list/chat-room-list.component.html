@@ -5,7 +5,7 @@
   </div>
   <div #chatRoomContainer class="flex-grow space-x-2 overflow-auto p-1">
     @for (chatRoom of chatRooms(); track chatRoom.id) {
-      <app-chat-room-card [isSelected]="selectedChatRoom === chatRoom"
+      <app-chat-room-card [isSelected]="selectedChatRoom?.id === chatRoom.id"
                           [chatRoom]="chatRoom"
                           (click)="selectChatRoom(chatRoom)">
       </app-chat-room-card>
