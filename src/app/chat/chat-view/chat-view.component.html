@@ -2,7 +2,7 @@
   <app-chat-room-list class="w-1/3"></app-chat-room-list>
 
   <div class="flex flex-col w-2/3 p-8">
-    <div class="flex-grow space-y-5 overflow-auto mb-6 pr-2">
+    <div #messageContainer class="flex-grow space-y-5 overflow-auto mb-6 pr-2">
       @for (message of chatMessages; track message.id) {
         <app-chat-message-card class="block" [chatMessage]="message"></app-chat-message-card>
       }
