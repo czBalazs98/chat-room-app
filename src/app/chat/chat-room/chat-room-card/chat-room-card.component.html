@@ -1,4 +1,5 @@
-<div class="chat-room-card flex shadow-md rounded-md bg-white p-3 cursor-pointer">
+<div [ngClass]="isSelected ? 'selected-chat-room' : ''"
+     class="chat-room-card flex shadow-md rounded-md bg-white p-3 cursor-pointer">
   <img class="mr-3" ngSrc="assets/images/default-chat-room-icon.svg" alt="chat room icon" height="40" width="40">
   <div class="w-full p-2 overflow-hidden">
     <p class="chat-room-title font-bold text-lg">{{ chatRoom.name }}</p>

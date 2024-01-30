@@ -4,10 +4,10 @@
   border-right: 4px solid white;
 }
 
-.chat-room-card:hover {
+.chat-room-card:hover, .selected-chat-room {
   border-right-color: $blue-400;
 }
 
-.chat-room-card:hover .chat-room-title {
+.chat-room-card:hover .chat-room-title, .selected-chat-room .chat-room-title {
   color: $blue-400;
 }

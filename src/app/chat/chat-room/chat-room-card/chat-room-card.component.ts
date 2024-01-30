@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {NgOptimizedImage} from "@angular/common";
+import {NgClass, NgOptimizedImage} from "@angular/common";
 import {ChatRoom} from "../model/chat-room";
 import {NzToolTipModule} from "ng-zorro-antd/tooltip";
 
@@ -8,7 +8,8 @@ import {NzToolTipModule} from "ng-zorro-antd/tooltip";
   standalone: true,
   imports: [
     NgOptimizedImage,
-    NzToolTipModule
+    NzToolTipModule,
+    NgClass
   ],
   templateUrl: './chat-room-card.component.html',
   styleUrl: './chat-room-card.component.scss'
@@ -16,6 +17,9 @@ import {NzToolTipModule} from "ng-zorro-antd/tooltip";
 export class ChatRoomCardComponent {
   @Input({required: true})
   chatRoom!: ChatRoom;
+
+  @Input()
+  isSelected: boolean = false;
 
   getChatRoomTags(): string {
     return this.chatRoom.tags ? this.chatRoom.tags.join(", ") : '';

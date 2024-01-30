@@ -5,6 +5,7 @@ import {NgOptimizedImage} from "@angular/common";
 import {ChatRoomListComponent} from "../chat-room/chat-room-list/chat-room-list.component";
 import {ChatMessage} from "../chat-messages/model/chat-message";
 import {ChatMessageCardComponent} from "../chat-messages/chat-message-card/chat-message-card.component";
+import {ChatRoom} from "../chat-room/model/chat-room";
 
 @Component({
   selector: 'app-chat-view',
@@ -23,6 +24,8 @@ export class ChatViewComponent {
 
   @ViewChild('messageContainer')
   messageContainer!: ElementRef;
+
+  selectedChatRoom: ChatRoom | null = null;
 
   chatMessages: ChatMessage[] = [
     {id: 1, created: new Date(), sender: 'C1JA2AIQ2tZ939l9NbtOa2iZvqs2', message: 'TestMessage', chatRoomId: 1},
