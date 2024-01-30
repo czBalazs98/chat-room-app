@@ -1,0 +1,8 @@
+<div [ngClass]="isOwnMessage() ? 'bg-blue-400 text-white' : 'bg-gray-100'"
+     class="flex rounded-md py-2 px-4 space-x-5">
+  <img [src]="getAvatar()" alt="{{chatMessage.id}} avatar">
+  <div class="flex flex-col">
+    <p>{{chatMessage.sender}}</p>
+    <p>{{chatMessage.message}}</p>
+  </div>
+</div>
