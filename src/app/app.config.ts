@@ -19,8 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     importProvidersFrom(
       provideFirebaseApp(() => initializeApp(environment.firebase)),
-      provideAuth(() => getAuth()),
-      provideDatabase(() => getDatabase())
+      provideAuth(() => getAuth())
     ),
     provideNzI18n(en_US),
     provideAnimations(),

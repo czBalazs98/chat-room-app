@@ -9,12 +9,10 @@ import {Observable} from "rxjs";
 })
 export class ChatRoomService {
 
-  dbRef = ref(this.database);
-
   private _chatRooms = signal<ChatRoom[]>([]);
   chatRooms = this._chatRooms.asReadonly();
 
-  constructor(private database: Database, private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient) {
   }
 
   findChatRooms(name: string | null) {

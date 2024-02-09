@@ -1,12 +1,13 @@
 <div class="flex h-full">
   <app-chat-room-list class="w-1/3" (selectChatRoomEvent)="selectChatRoom($event)"></app-chat-room-list>
 
-  <div class="flex flex-col w-2/3 p-8">
+  <div class="flex flex-col w-2/3 p-8" [formGroup]="messageForm">
     <div #messageContainer class="flex-grow space-y-5 overflow-auto mb-6 pr-2">
-      @for (message of chatMessages; track message.id) {
+      @for (message of chatMessages(); track message.id) {
         <app-chat-message-card class="block" [chatMessage]="message"></app-chat-message-card>
       }
     </div>
-    <input class="bg-gray-100 p-2 outline-none rounded-md" type="text">
+    <input class="bg-gray-100 p-2 outline-none rounded-md" type="text"
+           formControlName="message" (keyup.enter)="sendMessage()">
   </div>
 </div>

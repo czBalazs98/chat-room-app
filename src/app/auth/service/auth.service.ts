@@ -52,4 +52,8 @@ export class AuthService {
       this.router.navigate(['login']);
     });
   }
+
+  getCurrentUsername(): string {
+    return this._user()!.displayName ? this._user()!.displayName! : this._user()!.uid;
+  }
 }
