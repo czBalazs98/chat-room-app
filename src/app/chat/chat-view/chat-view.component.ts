@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {ChatRoomCardComponent} from "../chat-room/chat-room-card/chat-room-card.component";
 import {ChatRoomCreationComponent} from "../chat-room/chat-room-creation/chat-room-creation.component";
 import {NgOptimizedImage} from "@angular/common";
@@ -7,7 +7,7 @@ import {ChatMessage} from "../chat-messages/model/chat-message";
 import {ChatMessageCardComponent} from "../chat-messages/chat-message-card/chat-message-card.component";
 import {ChatRoom} from "../chat-room/model/chat-room";
 import {ChatMessageService} from "../chat-messages/service/chat-message.service";
-import {FormBuilder, FormControl, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
 import {AuthService} from "../../auth/service/auth.service";
 
 @Component({
@@ -27,7 +27,10 @@ import {AuthService} from "../../auth/service/auth.service";
 export class ChatViewComponent {
 
   @ViewChild('messageContainer')
-  messageContainer!: ElementRef;
+  msgContainer!: ElementRef;
+
+  @ViewChildren('msgCards')
+  msgCards!: QueryList<ChatMessageCardComponent>;
 
   selectedChatRoom: ChatRoom | null = null;
 
@@ -39,21 +42,24 @@ export class ChatViewComponent {
               private fb: FormBuilder) {
   }
 
-  ngOnInit() {
-    this.chatMessageService.join();
-  }
-
   ngAfterViewInit() {
-    this.scrollToBottom();
+    this.msgCards.changes.subscribe(e => this.scrollToBottom());
   }
 
   selectChatRoom(chatRoom: ChatRoom | null) {
     this.selectedChatRoom = chatRoom;
-    console.log(this.selectedChatRoom);
+
+    this.chatMessageService.disconnect();
+
+    if (this.selectedChatRoom) {
+      this.chatMessageService.findMessages(this.selectedChatRoom.id);
+
+      this.chatMessageService.join(this.selectedChatRoom.id);
+    }
   }
 
   scrollToBottom() {
-    const messageContainerElement = this.messageContainer.nativeElement;
+    const messageContainerElement = this.msgContainer.nativeElement;
     messageContainerElement.scrollTop = messageContainerElement.scrollHeight;
   }
 
@@ -63,7 +69,7 @@ export class ChatViewComponent {
       let chatMessage: ChatMessage = {
         message: messageText,
         sender: this.authService.getCurrentUsername(),
-        chatRoomId: 1
+        chatRoomId: this.selectedChatRoom!.id
       };
       this.chatMessageService.sendMessage(chatMessage);
       this.messageForm.get('message')!.reset();
