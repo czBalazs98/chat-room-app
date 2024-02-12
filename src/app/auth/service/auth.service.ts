@@ -33,7 +33,8 @@ export class AuthService {
       .then(user => {
         updateProfile(user.user, {displayName: createUserRequest.username})
           .then(_ => this.router.navigate(['chat']));
-      });
+      })
+      .catch(error => this.showError(error));
   }
 
   logIn(email: string, password: string) {
@@ -42,8 +43,7 @@ export class AuthService {
         this._user.set(response.user);
         this.router.navigate(['chat']);
       })
-      .catch(error => this.notification.error('Error', ErrorHandler.getErrorMessage(error.code),
-        {nzPlacement: 'top', nzDuration: 0}));
+      .catch(error => this.showError(error));
   }
 
   logOut() {
@@ -55,5 +55,10 @@ export class AuthService {
 
   getCurrentUsername(): string {
     return this._user()!.displayName ? this._user()!.displayName! : this._user()!.uid;
+  }
+
+  showError(error: any) {
+    this.notification.error('Error', ErrorHandler.getErrorMessage(error.code),
+      {nzPlacement: 'top', nzDuration: 0})
   }
 }
